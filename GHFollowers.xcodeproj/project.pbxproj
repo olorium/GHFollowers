@@ -16,6 +16,7 @@
 		8B79CAE3279C957C001D4F6C /* FavoritesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79CAE2279C957C001D4F6C /* FavoritesListVC.swift */; };
 		8B79CAE5279C9EC3001D4F6C /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79CAE4279C9EC2001D4F6C /* GFButton.swift */; };
 		8B79CAE7279CA424001D4F6C /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79CAE6279CA424001D4F6C /* GFTextField.swift */; };
+		8B79CAE9279DAA82001D4F6C /* FollowersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79CAE8279DAA81001D4F6C /* FollowersListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8B79CAE2279C957C001D4F6C /* FavoritesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListVC.swift; sourceTree = "<group>"; };
 		8B79CAE4279C9EC2001D4F6C /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		8B79CAE6279CA424001D4F6C /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
+		8B79CAE8279DAA81001D4F6C /* FollowersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				8B79CAD5279C8A7B001D4F6C /* LaunchScreen.storyboard */,
 				8B79CAD8279C8A7B001D4F6C /* Info.plist */,
 				8B79CAE0279C94E6001D4F6C /* SearchVC.swift */,
+				8B79CAE8279DAA81001D4F6C /* FollowersListVC.swift */,
 				8B79CAE2279C957C001D4F6C /* FavoritesListVC.swift */,
 				8B79CAE4279C9EC2001D4F6C /* GFButton.swift */,
 				8B79CAE6279CA424001D4F6C /* GFTextField.swift */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B79CAE7279CA424001D4F6C /* GFTextField.swift in Sources */,
+				8B79CAE9279DAA82001D4F6C /* FollowersListVC.swift in Sources */,
 				8B79CAE3279C957C001D4F6C /* FavoritesListVC.swift in Sources */,
 				8B79CAE5279C9EC3001D4F6C /* GFButton.swift in Sources */,
 				8B79CAE1279C94E6001D4F6C /* SearchVC.swift in Sources */,
