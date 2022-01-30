@@ -28,20 +28,25 @@ class FollowerCell: UICollectionViewCell {
     }
     
     private func configure() {
-        addSubview(avatarImageView)
-        addSubview(usernameLabel)
+        let bgView = UIView(frame: contentView.bounds)
+        addSubview(bgView)
+        bgView.addSubview(avatarImageView)
+        bgView.addSubview(usernameLabel)
         
         let padding: CGFloat = 8
         
         NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            avatarImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            bgView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            bgView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
+            avatarImageView.topAnchor.constraint(equalTo: bgView.topAnchor, constant: padding),
+            avatarImageView.leadingAnchor.constraint(equalTo: bgView.leadingAnchor, constant: padding),
+            avatarImageView.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -padding),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
             
             usernameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12),
-            usernameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            usernameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            usernameLabel.leadingAnchor.constraint(equalTo: bgView.leadingAnchor, constant: padding),
+            usernameLabel.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -padding),
             usernameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
