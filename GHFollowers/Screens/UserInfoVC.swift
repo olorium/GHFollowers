@@ -10,8 +10,8 @@ import UIKit
 class UserInfoVC: UIViewController {
     
     let headerview = UIView()
-    let itemView1 = UIView()
-    let itemView2 = UIView()
+    let itemViewOne = UIView()
+    let itemViewTwo = UIView()
     var itemViews: [UIView] = []
     
     var username: String!
@@ -40,6 +40,8 @@ class UserInfoVC: UIViewController {
             case .success(let user):
                 DispatchQueue.main.async {
                     self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerview)
+                    self.add(childVC: GFRepoItemVC(user: user), to: self.itemViewOne)
+                    self.add(childVC: GFFollowerItemVC(user: user), to: self.itemViewTwo)
                 }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
@@ -51,7 +53,7 @@ class UserInfoVC: UIViewController {
         let padding: CGFloat = 20
         let itemHeight: CGFloat = 140
         
-        itemViews = [headerview, itemView1, itemView2]
+        itemViews = [headerview, itemViewOne, itemViewTwo]
         
         for itemView in itemViews {
             view.addSubview(itemView)
@@ -67,11 +69,11 @@ class UserInfoVC: UIViewController {
             headerview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerview.heightAnchor.constraint(equalToConstant: 180),
             
-            itemView1.topAnchor.constraint(equalTo: headerview.bottomAnchor, constant: padding),
-            itemView1.heightAnchor.constraint(equalToConstant: itemHeight),
+            itemViewOne.topAnchor.constraint(equalTo: headerview.bottomAnchor, constant: padding),
+            itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight),
             
-            itemView2.topAnchor.constraint(equalTo: itemView1.bottomAnchor, constant: padding),
-            itemView2.heightAnchor.constraint(equalToConstant: itemHeight)
+            itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: padding),
+            itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight)
         ])
     }
     

@@ -31,4 +31,9 @@ class GFButton: UIButton {
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    func set(backgrounColor: UIColor, title: String) {
+        self.backgroundColor = backgrounColor
+        setTitle(title, for: .normal)
+    }
 }
