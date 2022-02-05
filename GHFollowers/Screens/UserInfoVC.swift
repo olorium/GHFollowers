@@ -7,14 +7,21 @@
 
 import UIKit
 
+protocol UserInfoVCDelegate: AnyObject {
+    func didTapGitHubProfile(for user: User)
+    func didTapGetFollowers(for user: User)
+}
+
 class UserInfoVC: UIViewController {
     
     let headerview = UIView()
     let itemViewOne = UIView()
     let itemViewTwo = UIView()
     var itemViews: [UIView] = []
+    let dateLbel = GFBodyLabel(textAlingment: .center)
     
     var username: String!
+    weak var delegate: FollowersListVCDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +46,7 @@ class UserInfoVC: UIViewController {
             switch result {
             case .success(let user):
                 DispatchQueue.main.async {
-                    self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerview)
-                    self.add(childVC: GFRepoItemVC(user: user), to: self.itemViewOne)
-                    self.add(childVC: GFFollowerItemVC(user: user), to: self.itemViewTwo)
+                    self.configureUIElements(with: user)
                 }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
@@ -49,11 +54,23 @@ class UserInfoVC: UIViewController {
         }
     }
     
+    func configureUIElements(with user: User) {
+        let repoItemVC = GFRepoItemVC(user: user)
+        let followerItemVC = GFFollowerItemVC(user: user)
+        repoItemVC.delegate = self
+        followerItemVC.delegate = self
+        
+        add(childVC: repoItemVC, to: self.itemViewOne)
+        add(childVC: followerItemVC, to: self.itemViewTwo)
+        add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerview)
+        dateLbel.text = "GitHub since \(user.createdAt.converToDisplayFormat())"
+    }
+    
     func layoutUI() {
         let padding: CGFloat = 20
         let itemHeight: CGFloat = 140
         
-        itemViews = [headerview, itemViewOne, itemViewTwo]
+        itemViews = [headerview, itemViewOne, itemViewTwo, dateLbel]
         
         for itemView in itemViews {
             view.addSubview(itemView)
@@ -73,7 +90,10 @@ class UserInfoVC: UIViewController {
             itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight),
             
             itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: padding),
-            itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight)
+            itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            dateLbel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
+            dateLbel.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
     
@@ -84,3 +104,26 @@ class UserInfoVC: UIViewController {
         childVC.didMove(toParent: self)
     }
 }
+
+//MARK:- Deleagtes
+
+extension UserInfoVC: UserInfoVCDelegate {
+    
+    func didTapGitHubProfile(for user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            presentGFAlertOnMainThread(title: "Invalid URL", message: "The url attached to this user is invalid.", buttonTitle: "Ok")
+            return
+        }
+        presentSafariVC(with: url)
+    }
+    
+    func didTapGetFollowers(for user: User) {
+        guard user.followers != 0 else {
+            presentGFAlertOnMainThread(title: "No followers", message: "This user has no followers 😞", buttonTitle: "So sad")
+            return
+        }
+        delegate.didRequestFollowers(for: user.login)
+        dismissVC()
+    }
+}
+
