@@ -18,15 +18,15 @@ class GFBodyLabel: UILabel {
         fatalError()
     }
     
-    init(textAlingment: NSTextAlignment) {
-        super.init(frame: .zero)
+    convenience init(textAlingment: NSTextAlignment) {
+        self.init(frame: .zero)
         self.textAlignment = textAlingment
-        configure()
     }
     
     private func configure() {
         textColor = .secondaryLabel
         font = UIFont.preferredFont(forTextStyle: .body)
+        adjustsFontForContentSizeCategory = true
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.75
         lineBreakMode = .byWordWrapping

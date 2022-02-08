@@ -14,7 +14,6 @@ extension UITableView {
         DispatchQueue.main.async { self.reloadData() }
     }
     
-
     func removeExcessCells() {
         tableFooterView = UIView(frame: .zero)
     }
