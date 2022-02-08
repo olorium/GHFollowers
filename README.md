@@ -1,4 +1,4 @@
-![alt text](https://github.com/olorium/GHFollowers//ghfollowers.png?raw=true)
+![alt text](https://github.com/olorium/GHFollowers/ghfollowers.png?raw=true)
 # Details:
 
 - The user can enter a GitHub username and retrieve a list of that username's followers.
